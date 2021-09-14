@@ -32,9 +32,6 @@
 ;; details, please refer https://github.com/kawabata/ox-pandoc.
 
 ;;; Code:
-
-(eval-when-compile
-  (require 'cl))
 (require 'ox-org)
 (require 'dash)
 (require 'ht)
