@@ -1,12 +1,19 @@
+#+TITLE: ox-pandoc
+
 * ox-pandoc
 
-This is another exporter that translates Org-mode file to various
-other formats via Pandoc.
+This is an
+[[https://orgmode.org/manual/Exporting.html#Exporting][exporter]] for
+[[https://orgmode.org/][Org mode]] which converts Org-mode files to a
+wide variety of other formats using the [[https://pandoc.org/][pandoc]]
+tool. Pandoc can produce PDFs, HTML, presentations, markdown files and
+e-pub publications as well as a number of other more specialised
+formats.
 
-* Description
+* Formats
 
-You can convert Org-mode file to various formats with simple commands.
-Following table shows the supported fromats.
+You can convert an Org-mode file to various formats with simple
+commands. The following table shows the supported formats:
 
 | format            | extension | buffer | file |
 |-------------------+-----------+--------+------|
@@ -54,14 +61,13 @@ Following table shows the supported fromats.
 * Requirements
 
 You need Emacs 24.2, org-mode 8.2, and Pandoc 2.0 (or later
-versions). Pandoc-Citeproc 0.3 (or later) may also be needed if you
-use bibliography features.
+versions). 
 
 Note that Org-mode equipped with Emacs 24.3 is version 7.9 and can not
-be used with this tool. It is recommended to install Pandoc via [[http://www.haskell.org/cabal/][Cabal]],
-or the installer directly downloaded from official web sites, as other
-package managers (such as Anaconda) sometimes install old versions of
-Pandoc.
+be used with this tool. It is recommended to install Pandoc directly
+from [[https://pandoc.org/installing.html][the official website]]. Other
+package managers (such as Anaconda, apt) sometimes install old versions
+of Pandoc.
 
 * Installation
 
@@ -77,8 +83,18 @@ You can install this tool with [[www.melpa.org][MELPA]].  For example,
 : ox-pandoc ⏎
 
 * Usage
+** Using Org's export-dispatch menu
+   As always in Org, =C-c C-e= brings up the export dispatch menu for
+   the current org-mode file. =ox-pandoc= lives under the =p= key. By
+   default, options are offered to convert the org-file to a number of
+   commonly used formats, such as LaTeX, PDF and HTML.
 
-** Running the Commands
+   As pandoc supports many formats, the default
+   =org-export-dispatch= shortcut menu does not show all the
+   supported formats. You can customize =org-pandoc-menu-entry= variable
+   (and probably restart Emacs) to change its default menu entries.
+
+** Running the Commands directly
 
 For example, to convert org-mode file to 'html5' format, you may run
 the following commands.
@@ -179,12 +195,7 @@ Following is an example:
 : #+latex_header: \IEEEauthorblockA{FooBar Institute\\
 : #+latex_header: Email: john.smith@foo.bar}
 
-** Customizing Shortcuts
-As pandoc supports many number of formats, initial
-=org-export-dispatch= shortcut menu does not show full of its
-supported formats. You can customize =org-pandoc-menu-entry= variable
-(and probably restart Emacs) to change its default menu entries.
-
+** Delayed loading of ox-pandoc
 If you want delayed loading of `ox-pandoc' when
 =org-pandoc-menu-entry= is customized, please consider the following
 settings in your init file.
@@ -194,20 +205,23 @@ settings in your init file.
   (require 'ox-pandoc))
 #+END_SRC
 
-* VS.
+* Comparisons.
 
 ** org-pandoc
 
-This file is inspired by [[https://github.com/robtillotson/org-pandoc][org-pandoc]], but entirely re-written. This
-tool prepares various export commands for all formats supported by
-pandoc.
+This package is inspired by
+[[https://github.com/robtillotson/org-pandoc][org-pandoc]], but entirely
+re-written. The older package is not maintained.
 
-* Note
+** Babel, evaluating source code
+Neither =org-pandoc= nor the =pandoc= tool itself know how to evaluate =SRC= blocks and prepare output from those code blocks for presentation formats. In =ox-pandoc=, =SRC= blocks in other languages are evaluated and the results prepared according to the headers before being passed to pandoc. 
 
+
+* Notes
 ** Temporary Files
 
 This file creates and removes "XXXX.tmpZZZZ.org" and
-"XXXX.tmpZZZZ.css" (if necessary) temprary files in working directory.
+"XXXX.tmpZZZZ.css" (if necessary) temporary files in working directory.
 (ZZZZ is random string.)
 
 ** Obsolete In-File Options
