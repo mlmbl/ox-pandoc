@@ -239,7 +239,8 @@ set as `(markdown_strict+footnotes)'."
                      (table     . org-pandoc-table)
                      (template  . org-pandoc-template)
                      (paragraph . org-pandoc-paragraph)
-                     (src-block . org-pandoc-src-block))
+                     (src-block . org-pandoc-src-block)
+					 (export-block . org-pandoc-export-block))
   ;; :export-block "PANDOC"
   :menu-entry
   `(?p "export via pandoc"
@@ -1714,6 +1715,14 @@ contextual information."
                                 #'org-pandoc--has-caption-p)
   ;; Export the src-block with it's modified caption
   (org-export-expand src-block contents t))
+
+(defun org-pandoc-export-block (export-block contents info)
+  "Transcode a EXPORT-BLOCK element from Org to Pandoc.
+This might be EXPORT_HTML or EXPORT_LATEX, and is simply 
+duplicated into the temporary org file that pandoc converts.
+CONTENTS is the contents of the block. INFO is a plist holding
+contextual information."
+  (org-pandoc-identity export-block contents info))
 
 (defun org-pandoc-identity (blob contents _info)
   "Transcode BLOB element or object back into Org syntax.
