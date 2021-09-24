@@ -69,8 +69,8 @@
 (defconst org-pandoc-file-options
   '(abbreviations bibliography citation-abbreviations csl
     epub-cover-image epub-embed-font epub-metadata include-after-body
-    include-before-body include-in-header log print-default-data-file
-    reference-doc syntax-definition ))
+    include-before-body include-in-header log lue-filter
+	print-default-data-file reference-doc syntax-definition ))
 
 (defconst org-pandoc-extensions
   '((asciidoc . txt) (beamer . tex)
