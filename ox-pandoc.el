@@ -107,6 +107,13 @@ set as `(markdown_strict+footnotes)'."
   :group 'org-pandoc
   :type 'string)
 
+(defcustom org-pandoc-check-version t
+  "Whether to check for a pandoc executable and its version on loading.
+If true, will warn if no pandoc can be found, or if it is an older
+version. If nil, no checks are performed and no warnings generated."
+  :group 'org-pandoc
+  :type 'boolean)
+
 (defcustom org-pandoc-menu-entry
   '(
     ;;(?0 "to jats." org-pandoc-export-to-jats)
@@ -1855,6 +1862,9 @@ OPTIONS is a hashtable.  It runs asynchronously."
 (defun org-pandoc-startup-check ()
   "Check the current pandoc version."
   (interactive)
+  (catch 'check-suppressed
+	(unless org-pandoc-check-version
+	  (throw 'check-suppressed nil))
   (if (not (executable-find org-pandoc-command))
       (display-warning 'ox-pandoc "Pandoc command is not installed.")
     (let ((version (with-temp-buffer
@@ -1868,7 +1878,7 @@ OPTIONS is a hashtable.  It runs asynchronously."
                       ;;(and (= 1 major)
                       ;;     (< 12 minor))
                       )
-            (display-warning 'ox-pandoc "This Pandoc (1.x) may not support new pandoc features.")))))))
+            (display-warning 'ox-pandoc "This Pandoc (1.x) may not support new pandoc features."))))))))
 
 (org-pandoc-startup-check)
 
