@@ -1,15 +1,17 @@
 ;;; ox-pandoc.el --- org exporter for pandoc.        -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2014-2017 KAWABATA, Taichi
+;; Copyright (C) 2021 FENTON, Alex
 
 ;; Filename: ox-pandoc.el
 ;; Description: Another org exporter for Pandoc
 ;; Author: KAWABATA, Taichi <kawabata.taichi@gmail.com>
+;; Author: FENTON, Alex <a-fent@github>
 ;; Created: 2014-07-20
-;; Version: 1.180510
+;; Version: 1.210925
 ;; Package-Requires: ((org "8.2") (emacs "24") (dash "2.8") (ht "2.0") (cl-lib "0.5"))
 ;; Keywords: tools
-;; URL: https://github.com/kawabata/ox-pandoc
+;; URL: https://github.com/a-fent/ox-pandoc
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -29,7 +31,7 @@
 ;; This is another exporter for org-mode that translates Org-mode file
 ;; to various other formats via Pandoc.  You need org-mode version 8.2
 ;; or later, and Pandoc 2.0 or later, to use this package.  For
-;; details, please refer https://github.com/kawabata/ox-pandoc.
+;; details, please refer https://github.com/a-fent/ox-pandoc.
 
 ;;; Code:
 (require 'ox-org)
