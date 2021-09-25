@@ -58,19 +58,18 @@ commands. The following table shows the supported formats:
 
 * Requirements
 
-You need Emacs 24.2, org-mode 8.2, and Pandoc 2.0 (or later
+You need Emacs 24.4, org-mode 8.2, and Pandoc 2.0 (or later
 versions). 
 
-Note that Org-mode equipped with Emacs 24.3 is version 7.9 and can not
-be used with this tool. It is recommended to install Pandoc directly
-from [[https://pandoc.org/installing.html][the official website]]. Other
-package managers (such as Anaconda, apt) sometimes install old versions
-of Pandoc.
+Installing Pandoc directly from
+[[https://pandoc.org/installing.html][the official website]] is
+recommended. The versions of Pandoc provided by package managers and
+distributions is often quite out-of-date.
 
 By default, =ox-pandoc= will check on starting up whether there is a
-suitable pandoc executable available. When none, or an older version is
-found, a warning will be emitted. This warning can be suppressed by setting
-customisation option =org-pandoc-check-version= to nil.
+suitable pandoc executable available. When none is found, or the version
+is too old,, a warning will be emitted. This warning can be suppressed
+by setting customisation option =org-pandoc-check-version= to =nil=.
 
 * Installation
 
