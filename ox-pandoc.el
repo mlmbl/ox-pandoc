@@ -1841,6 +1841,7 @@ Called on completion of an asynchronous pandoc process."
                  (org-open-file output-file)))
            ;; output to buffer
            (pop-to-buffer buffer)
+		   (goto-char (point-min))
            (run-hooks local-hook-symbol)
            (set-auto-mode)))))))
 
