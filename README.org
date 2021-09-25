@@ -1,16 +1,14 @@
 #+TITLE: ox-pandoc
 
-* ox-pandoc
-
-This is an
+=ox-pandoc= is an 
 [[https://orgmode.org/manual/Exporting.html#Exporting][exporter]] for
 [[https://orgmode.org/][Org mode]] which converts Org-mode files to a
 wide variety of other formats using the [[https://pandoc.org/][pandoc]]
-tool. Pandoc can produce PDFs, HTML, presentations, markdown files and
-e-pub publications as well as a number of other more specialised
-formats.
+tool. Pandoc can produce PDFs, HTML, presentations, markdown files,
+office documents and e-pub publications as well as a number of other
+more specialised formats.
 
-* Formats
+* Supported Formats
 
 You can convert an Org-mode file to various formats with simple
 commands. The following table shows the supported formats:
