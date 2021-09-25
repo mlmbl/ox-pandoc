@@ -220,27 +220,19 @@ settings in your init file.
   (require 'ox-pandoc))
 #+END_SRC
 
-* Comparisons.
-
-** org-pandoc
-
-This package is inspired by
-[[https://github.com/robtillotson/org-pandoc][org-pandoc]], but entirely
-re-written. The older package is not maintained.
-
-** Babel, evaluating source code
-Neither =org-pandoc= nor the =pandoc= tool itself know how to evaluate =SRC= blocks and prepare output from those code blocks for presentation formats. In =ox-pandoc=, =SRC= blocks in other languages are evaluated and the results prepared according to the headers before being passed to pandoc. 
-
-
 * Notes
 ** Temporary Files
+=ox-pandoc= works by first using Org-mode's own conversion functions to
+export a temporary version of the org file and then calling =pandoc=
+with the appropriate switches on this file. This process creates
+temporary files in the working directory called "XXXX.tmpZZZZ.org" and
+"XXXX.tmpZZZZ.css" (if necessary). (ZZZZ is a random string)
 
-This file creates and removes "XXXX.tmpZZZZ.org" and
-"XXXX.tmpZZZZ.css" (if necessary) temporary files in working directory.
-(ZZZZ is random string.)
-
+Under normal operation the temporary files are deleted automatically
+when `pandoc` has finished processing them. If you use =recentf=, you
+may find these files clutter your recent files list. =M-x
+recentf-cleanup= should remove them.
 ** Source Code Blocks
-
 =ox-pandoc= supports the export of code blocks, including code blocks
 for specific formats (e.g. LaTeX). Code wrapped in =BEGIN_EXPORT
 [format]= will be passed to pandoc and included in the final output if
@@ -253,7 +245,9 @@ manual]] for working with source code should be supported: source code,
 results, both or neither can included in the final document and outputs
 can be specified for particular output formats (e.g. HTML).
 
-*IMPORTANT*: if you wish to include evaluated =SRC= blocks and their results in documents processed by pandoc, each should be given a unique name. For example.
+*IMPORTANT*: if you wish to include evaluated =SRC= blocks and their
+results in documents to be processed by pandoc, each block should be
+given a unique name. For example.
 
 #+BEGIN_EXAMPLE
 #+NAME: my--block
@@ -272,16 +266,24 @@ They are no longer supported.
 - =EPUB_STYLESHEET:= :: obsolete. Use =epub-stylesheet= in
      =PANDOC_OPTIONS:= instead.
 
-** Citation
+** Citations
+Pandoc offers a [[https://pandoc.org/org.html#citations][number of
+options for processing citations]] in org documents. Until September
+2021, Org-mode itself had no official citation syntax and a number of
+incompatible solutions and formats. At present, you must ensure that
+citations are either resolved in Org-mode or translated into a format
+Pandoc understands.
 
-Currently, Pandoc citation key is expressed as /@key/, rather than
-/{\cite key}/ . You may need some text converter if you want to use
-Pandoc citation styles in org document.
+When the official Org-mode citation syntax becomes available in general
+Org-mode releases (planned for Org 9.5, September 2021), =ox-pandoc=
+will seek to support this.
+
+* History and People
+  This package was inspired by [[https://github.com/robtillotson/org-pandoc][org-pandoc]], but was entirely re-written by [[http://github.com/kawabata][kawabata]] who is the original author of =ox-pandoc=. The code was released as a emacs package via MELPA.
+
+  In 2021, the package was updated to address small feature requests, apply patches and fix a number of bugs, most of which had arisen through changes in =pandoc= itself. The package is currently maintained by  [[http://github.com/a-fent][a-fent]].
 
 * License
 
   GPLv2.
 
-* Author
-
-- [[http://github.com/kawabata][kawabata]]
