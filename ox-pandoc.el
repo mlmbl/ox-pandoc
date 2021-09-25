@@ -6,7 +6,7 @@
 ;; Filename: ox-pandoc.el
 ;; Description: Another org exporter for Pandoc
 ;; Author: KAWABATA, Taichi <kawabata.taichi@gmail.com>
-;; Author: FENTON, Alex <a-fent@github>
+;;         FENTON, Alex <a-fent@github>
 ;; Maintainer: FENTON, Alex <a-fent@github>
 ;; Created: 2014-07-20
 ;; Version: 1.210925
