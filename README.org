@@ -63,6 +63,11 @@ or the installer directly downloaded from official web sites, as other
 package managers (such as Anaconda) sometimes install old versions of
 Pandoc.
 
+By default, =ox-pandoc= will check on starting up whether there is a
+suitable pandoc executable available. When none, or an older version is
+found, a warning will be emitted. This warning can be suppressed by setting
+customisation option =org-pandoc-check-version= to nil.
+
 * Installation
 
 You can install this tool with [[www.melpa.org][MELPA]].  For example,
