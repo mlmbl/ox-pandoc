@@ -1637,8 +1637,7 @@ holding contextual information."
          ;; Valid destination, but without a numbered caption/equation
          ;; and not a heading, fallback to standard org-mode link format
          (t
-          (org-element-link-interpreter link contents))
-         )))
+          (org-element-link-interpreter link contents)))))
 
      ;; Otherwise, fallback to standard org-mode link format
      ((org-element-link-interpreter link contents)))))
