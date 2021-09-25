@@ -1569,13 +1569,15 @@ INFO is a plist holding contextual information."
       output)))
 
 (defun org-pandoc-link (link contents info)
-  "Transcode LINK object using the registered formatter for the
-'pandoc backend.  If none exists, transcode using the registered
-formatter for the 'org export backend.  For fuzzy (internal)
-links, resolve the link destination in order to determine the
-appropriate reference number of the target Table/Figure/Equation
-etc.  CONTENTS is the description of the link, as a string, or
-nil.  INFO is a plist holding contextual information."
+  "Transcode a LINK object.
+
+The registered formatter for the 'pandoc backend is used. If none
+exists, transcode using the registered formatter for the 'org
+export backend. For fuzzy (internal) links, resolve the link
+destination in order to determine the appropriate reference
+number of the target Table/Figure/Equation etc. CONTENTS is the
+description of the link, as a string, or nil. INFO is a plist
+holding contextual information."
   (let ((type (org-element-property :type link)))
     (cond
      ;; Try exporting with a registered formatter for 'pandoc
