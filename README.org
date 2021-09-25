@@ -270,9 +270,19 @@ They are no longer supported.
 Pandoc offers a [[https://pandoc.org/org.html#citations][number of
 options for processing citations]] in org documents. Until September
 2021, Org-mode itself had no official citation syntax and a number of
-incompatible solutions and formats. At present, you must ensure that
-citations are either resolved in Org-mode or translated into a format
-Pandoc understands.
+incompatible solutions and formats. At present, if you wish to cite
+references in an org-mode document to be rendered by Pandoc, there are a
+number of approaches:
+
+1. Ensure that your citation format (e.g. org-mode links from [[https://github.com/jkitchin/org-ref][org-ref]]) is translated to a citation format pandoc understands.
+2. If exporting to LaTeX, ensure that the citations are translated to LaTeX citation commands.
+3. Use a citation format that Pandoc understands in your source Org-mode file (this loses the advantages of syntax highlighting and interaction with the links).
+4. Resolve all citations and bibliographies before passing to Pandoc.
+
+If you wish Pandoc to process citations in an org-mode file, the file
+should set =#+PANDOC_OPTIONS: citeproc:t= (or equivalent global setting)
+and also specify the bibliography file with =#+BIBLIOGRAPHY:
+my-references.bib=.
 
 When the official Org-mode citation syntax becomes available in general
 Org-mode releases (planned for Org 9.5, September 2021), =ox-pandoc=
