@@ -84,17 +84,18 @@ You can install this tool with [[www.melpa.org][MELPA]].  For example,
 : M-x package-install ⏎
 : ox-pandoc ⏎
 
-* Usage
+* Usage and Customisation
 ** Using Org's export-dispatch menu
    As always in Org, =C-c C-e= brings up the export dispatch menu for
    the current org-mode file. =ox-pandoc= lives under the =p= key. By
    default, options are offered to convert the org-file to a number of
    commonly used formats, such as LaTeX, PDF and HTML.
 
-   As pandoc supports many formats, the default
-   =org-export-dispatch= shortcut menu does not show all the
-   supported formats. You can customize =org-pandoc-menu-entry= variable
-   (and probably restart Emacs) to change its default menu entries.
+   As pandoc supports many formats, the default =org-export-dispatch=
+   shortcut menu does not show all the supported formats. You can
+   customize =org-pandoc-menu-entry= variable (and probably restart
+   Emacs) to change its default menu entries. A full list of exporting
+   commands and suggested shortcuts can be found in =ox-pandoc.el=.
 
 ** Running the Commands directly
 
@@ -105,25 +106,26 @@ the following commands.
 - =org-pandoc-export-to-html5= :: Exports to the HTML5 text file.
 - =org-pandoc-export-to-html5-and-open= :: Exports and open HTML5 file.
 
-Similar commands are prepared for various formats.
+Similar commands are prepared for a wide variety of other output
+formats.
 
-** Customizing User Option Variables
+The opening of exported files in the =XXX-and-open= variants is handled
+by =org-open-file=. Which applications are used for different file types
+can be customised in Org Mode by the =org-file-apps= variable.
 
-You can specify the default options for each document format and
-hooks.
+** User options and variables
+
+You can specify the default options passed to pandoc and used on its
+command-line for each document format. 
 
 - =org-pandoc-options= :: General Pandoc options.
 - =org-pandoc-options-for-FORMAT= :: Format-specific options.
-- =org-pandoc-after-processing-FORMAT-hook= :: Hook after processing
-     =FORMAT=. This hook is only available to text-file =FORMAT=.
 - =org-pandoc-epub-rights= :: EPUB Copyright Statement.
 
 Options should be specified by an alist. List of valid options are
 defined in =org-pandoc-valid-options=. Only long-name options can be
-used. =after-processing= options can not be specified to =epub=,
-=docx= or =pdf= formats. For preprocessing hooks, use
-=org-export-before-processing-hook=.
-
+used. For example, =metadata= must be given as the option name, even
+though Pandoc accepts a short-form version of the argument ("-M").
 Multiple values can be specified to options defined in
 =org-pandoc-colon-separated-options=. They should be defined in
 colon-separated list.
@@ -148,14 +150,25 @@ For example:
 (setq org-pandoc-format-extensions '(markdown_github+pipe_tables+raw_html))
 #+END_SRC
 
+** Hooks 
+Hooks are also provided to be called when =pandoc= has completed processing.
+
+- =org-pandoc-after-processing-FORMAT-hook= :: Hook called after processing =FORMAT=. 
+
+These hooks are only available for text-file =FORMAT=.
+=after-processing= options can not be specified to =epub=, =docx= or
+=pdf= formats.
+
+For preprocessing hooks, use =org-export-before-processing-hook=.
+
 ** Document-Specific Options
 
-Following document-specific options can be specified. Value =nil=
+The following document-specific options can be specified. Value =nil=
 overrides preceding option setting. Value =t= means only specify
 option, but not its value. Options are delimited by space.
 =#+PANDOC_OPTIONS:= can be specified multiple times. If you want to
-specify the option value which include space character, quote /entire/
-option-value pair.
+specify the option value which include space character, the /entire/
+option-value pair must be quoted (see example below).
 
 - =PANDOC_OPTIONS:= :: Add command line options to the Pandoc process.
 - =PANDOC_METADATA:= :: Metadata for Pandoc.
