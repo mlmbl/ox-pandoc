@@ -1441,9 +1441,9 @@ version. If nil, no checks are performed and no warnings generated."
 If BUF-OR-OPEN is nil, output to file.  0, then open the file.
 t means output to buffer."
   (unless (derived-mode-p 'org-mode)
-    (error "This command must be run on an org-mode buffer."))
+    (error "This command must be run on an org-mode buffer"))
   (unless (executable-find org-pandoc-command)
-    (error "Pandoc (version 1.12.4 or later) can not be found."))
+    (error "Pandoc (version 1.12.4 or later) can not be found"))
   (setq org-pandoc-format format)
   (org-export-to-file 'pandoc (org-export-output-file-name
                                (concat (make-temp-name ".tmp") ".org") s)
@@ -1726,7 +1726,7 @@ contextual information."
 
 (defun org-pandoc-export-block (export-block contents info)
   "Transcode a EXPORT-BLOCK element from Org to Pandoc.
-This might be EXPORT_HTML or EXPORT_LATEX, and is simply 
+This might be EXPORT_HTML or EXPORT_LATEX, and is simply
 duplicated into the temporary org file that pandoc converts.
 CONTENTS is the contents of the block. INFO is a plist holding
 contextual information."
