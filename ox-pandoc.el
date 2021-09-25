@@ -1806,8 +1806,8 @@ If 0, target is file and converted file will automatically be opend."
       (process-put process 'buffer-or-open buffer-or-open))))
 
 (defun org-pandoc-sentinel (process message)
-  "PROCESS sentinel with MESSAGE."
-  (message "debug :: sentinel enter!")
+  "PROCESS sentinel with MESSAGE.
+Called on completion of an asynchronous pandoc process."
   (cl-case (process-status process)
     (run)
     (signal
@@ -1842,8 +1842,9 @@ If 0, target is file and converted file will automatically be opend."
 
 (defun org-pandoc-run (input-file output-file format sentinel &optional options)
   "Run pandoc command with INPUT-FILE (org), OUTPUT-FILE, FORMAT and OPTIONS.
-If BUFFER-OR-FILE is buffer, then output to specified buffer.
-OPTIONS is a hashtable.  It runs asynchronously."
+If BUFFER-OR-FILE is buffer, then output to specified buffer. OPTIONS is
+a hashtable.  Pandoc runs asynchronously and SENTINEL is called
+when the process completes."
   (let* ((format (symbol-name format))
          (output-format
           (car (--filter (string-prefix-p format it)
