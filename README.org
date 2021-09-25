@@ -229,6 +229,29 @@ This file creates and removes "XXXX.tmpZZZZ.org" and
 "XXXX.tmpZZZZ.css" (if necessary) temporary files in working directory.
 (ZZZZ is random string.)
 
+** Source Code Blocks
+
+=ox-pandoc= supports the export of code blocks, including code blocks
+for specific formats (e.g. LaTeX). Code wrapped in =BEGIN_EXPORT
+[format]= will be passed to pandoc and included in the final output if
+the output is of the appropriate format.
+
+=ox-pandoc= also supports the evaluation of embedded code blocks wrapped
+with =BEGIN_SRC [language]=. The various options described by the
+[[https://orgmode.org/manual/Working-with-Source-Code.html#Working-with-Source-Code][Org-mode
+manual]] for working with source code should be supported: source code,
+results, both or neither can included in the final document and outputs
+can be specified for particular output formats (e.g. HTML).
+
+*IMPORTANT*: if you wish to include evaluated =SRC= blocks and their results in documents processed by pandoc, each should be given a unique name. For example.
+
+#+BEGIN_EXAMPLE
+#+NAME: my--block
+#+BEGIN_SRC emacs-lisp :exports both :results value
+(+ 4 7)
+#+END_SRC
+#+END_EXAMPLE
+
 ** Obsolete In-File Options
 
 Following options are supported in previous version of =ox-pandoc=.
