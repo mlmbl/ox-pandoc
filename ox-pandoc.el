@@ -1440,8 +1440,8 @@ version. If nil, no checks are performed and no warnings generated."
   "General interface for Pandoc Export.
 If BUF-OR-OPEN is nil, output to file.  0, then open the file.
 t means output to buffer."
-  (unless (equal major-mode 'org-mode)
-    (error "You must run this command in org-mode."))
+  (unless (derived-mode-p 'org-mode)
+    (error "This command must be run on an org-mode buffer."))
   (unless (executable-find org-pandoc-command)
     (error "Pandoc (version 1.12.4 or later) can not be found."))
   (setq org-pandoc-format format)
