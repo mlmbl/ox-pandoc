@@ -1,4 +1,4 @@
-;;; ox-pandoc.el --- org exporter for pandoc.        -*- lexical-binding: t; -*-
+;;; ox-pandoc.el --- An Org-mode exporter using pandoc -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2014-2017 KAWABATA, Taichi
 ;; Copyright (C) 2021 FENTON, Alex
