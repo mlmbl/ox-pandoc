@@ -245,13 +245,14 @@ version. If nil, no checks are performed and no warnings generated."
   :type 'list)
 
 (org-export-define-derived-backend 'pandoc 'org
-  :translate-alist '((latex-environment . org-pandoc-latex-environ)
+  :translate-alist '((entity    . org-pandoc-entity)
+					 (export-block . org-pandoc-export-block)
+					 (latex-environment . org-pandoc-latex-environ)
                      (link      . org-pandoc-link)
-                     (table     . org-pandoc-table)
-                     (template  . org-pandoc-template)
                      (paragraph . org-pandoc-paragraph)
                      (src-block . org-pandoc-src-block)
-					 (export-block . org-pandoc-export-block))
+                     (table     . org-pandoc-table)
+                     (template  . org-pandoc-template))
   ;; :export-block "PANDOC"
   :menu-entry
   `(?p "export via pandoc"
