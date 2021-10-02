@@ -1502,6 +1502,19 @@ is meant to be used as a predicate for `org-export-get-ordinal'."
          "\\end{" (backref 1) "}" )
      raw-value)))
 
+(defun org-pandoc-entity (entity _contents _info)
+  "Transcode an ENTITY object for export with pandoc.
+Support org's default entities ('org-entities') and user-defined
+ones ('org-entities-user'). If the final format which pandoc will
+produce is a TeX-based format, use the LaTeX representation.For
+all other formats, output the UTF-8 symbol and let pandoc
+handle its representation in the final format.
+CONTENTS are the definition itself. INFO is a plist holding
+contextual information."
+  (if (member org-pandoc-format '(beamer beamer-pdf latex latex-pdf))
+	  (org-element-property :latex entity)
+	(org-element-property :utf-8 entity)))
+
 (defun org-pandoc-latex-environ (latex-env contents info)
   "Transcode a latex environment for export with pandoc.
 Works around a bug in
