@@ -266,27 +266,33 @@ They are no longer supported.
 - =EPUB_STYLESHEET:= :: obsolete. Use =epub-stylesheet= in
      =PANDOC_OPTIONS:= instead.
 
-** Citations
-Pandoc offers a [[https://pandoc.org/org.html#citations][number of
-options for processing citations]] in org documents. Until September
-2021, Org-mode itself had no official citation syntax and a number of
-incompatible solutions and formats. At present, if you wish to cite
-references in an org-mode document to be rendered by Pandoc, there are a
-number of approaches:
+** Citations and Bibliographies (Experimental)
+Citations can be inserted into Org documents and then, when the document
+is exported and linked to a bibliography file, the citations are
+formatted correctly (e.g. in footnotes, numbered or author-year style)
+and a formatted bibliography added to the output document. Pandoc has
+long had a [[https://pandoc.org/org.html#citations][number of options
+for processing citations]] in org documents. With version 9.5
+(September 2021) Org Mode added [[https://orgmode.org/manual/Citation-handling.html][official syntax and support for citations]].
 
-1. Ensure that your citation format (e.g. org-mode links from [[https://github.com/jkitchin/org-ref][org-ref]]) is translated to a citation format pandoc understands.
-2. If exporting to LaTeX, ensure that the citations are translated to LaTeX citation commands.
-3. Use a citation format that Pandoc understands in your source Org-mode file (this loses the advantages of syntax highlighting and interaction with the links).
-4. Resolve all citations and bibliographies before passing to Pandoc.
+=ox-pandoc= aims fully to support citation handling and export in Org Mode 9.5+ and =pandoc=. This is complicated by the many potential formats and by there being overlapping but not 100% compatible tools involved. Citation support should be seen as *experimental* and I encourage you to report unexpected results, please including sample documents.
 
-If you wish Pandoc to process citations in an org-mode file, the file
-should set =#+PANDOC_OPTIONS: citeproc:t= (or equivalent global setting)
-and also specify the bibliography file with =#+BIBLIOGRAPHY:
-my-references.bib=.
+In all cases, you can indicate what bibliography file is the source for citations in a document with a header =#+BIBLIOGRAPHY: my-references.bib=. Bibliographies can potentially be in =.bib=, =.yaml= or =.json= format. A =#+CITE_EXPORT:= header indicates how citations in the document are processed before being handed to pandoc. Which [[https://orgmode.org/manual/Citation-export-processors.html][exporter]] to choose depends on what final document format is targetted:
 
-When the official Org-mode citation syntax becomes available in general
-Org-mode releases (planned for Org 9.5, September 2021), =ox-pandoc=
-will seek to support this.
+*** Exporting citations to LaTeX / PDF
+If the document is going to be transformed to TeX and then compiled by a LaTeX processor to make (for example) a PDF, you should probably choose either the =biblatex= or =natbib= processor. Additional arguments to the header can specify the citation and bibliography format wanted from =biblatex= or =natbib= - see the [[https://orgmode.org/manual/Citation-export-processors.html][Org Manual]].
+
+In this case, =cite:= commands are replaced with the appropriate LaTeX commands. Pandoc should ignore these and pass them through to the LaTeX compiler.
+
+*** Exporting citations to HTML, ODT, DocX etc
+For other formats, the best approach at the moment is to use the =csl= Org-Mode cite processor; this requires that the =citeproc-el= Emacs package be installed. A =.csl= (Citation Style Language) file can be specified to determine how citations and bibligraphy are to be formatted.
+
+In this case, citations and bibliography are resolved and formatted before they are passed to Pandoc, which should simply pass on the formatting to the final output document.
+
+*** Alternative: using Pandoc citation syntax
+An alternative to the above (also relevant for Org 9.4 and earlier) is to ensure that citations in text are transformed to [[https://pandoc.org/org.html#citations][one of the formats that Pandoc recognises in org documents]]. You should then set  =#+PANDOC_OPTIONS: citeproc:t= in the document header.
+
+In this case, citations are instead processed by =pandoc= using CSL. This may be a good solution if you are using one of the alternative citation systems for Org, such as =org-ref=. A goal in =ox-pandoc= is to offer an alternative citation export processor that outputs Pandoc-specific citation syntax, but this is still in planning.
 
 * History and People
   This package was inspired by [[https://github.com/robtillotson/org-pandoc][org-pandoc]], but was entirely re-written by [[http://github.com/kawabata][kawabata]] who is the original author of =ox-pandoc=. The code was released as a emacs package via MELPA.
