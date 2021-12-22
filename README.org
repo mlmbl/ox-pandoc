@@ -1,4 +1,4 @@
-#+TITLE: ox-pandoc
+#+TITLE: ox-pandoc: an exporter for Org Mode using pandoc
 
 =ox-pandoc= is an 
 [[https://orgmode.org/manual/Exporting.html#Exporting][exporter]] for
