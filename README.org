@@ -150,18 +150,7 @@ For example:
 (setq org-pandoc-format-extensions '(markdown_github+pipe_tables+raw_html))
 #+END_SRC
 
-** Hooks 
-Hooks are also provided to be called when =pandoc= has completed processing.
-
-- =org-pandoc-after-processing-FORMAT-hook= :: Hook called after processing =FORMAT=. 
-
-These hooks are only available for text-file =FORMAT=.
-=after-processing= options can not be specified to =epub=, =docx= or
-=pdf= formats.
-
-For preprocessing hooks, use =org-export-before-processing-hook=.
-
-** Document-Specific Options
+** Document-specific Options for Pandoc
 
 The following document-specific options can be specified. Value =nil=
 overrides preceding option setting. Value =t= means only specify
@@ -209,6 +198,24 @@ Following is an example:
 : #+latex_header: \author{\IEEEauthorblockN{John Smith}
 : #+latex_header: \IEEEauthorblockA{FooBar Institute\\
 : #+latex_header: Email: john.smith@foo.bar}
+
+** Org-Mode Export Settings
+Org Mode defines a considerable number of [[https://orgmode.org/manual/Export-Settings.html][Export settings]]. These control which parts of the org document are exported and how this is done. For example, they can be used to set whether a table of contents is created and whether title and author should be inserted into the output document.
+
+Pandoc should understand and follow these directives. *HOWEVER* pandoc only operates on the file it is given and does not know about settings from Emacs such as customisations. If, for example, you wish not to have a Table of Contents, there must be a line =#+OPTIONS: toc:nil= in the file itself; any global setting of =org-export-with-toc= will not be respected.
+
+Note that Org Mode will by default try to deduce the author's full name (using =user-full-name=) when exporting, even if it is not given in the org document. To suppress this, add =#+OPTIONS: author: nil= in the document's header.
+
+** Hooks 
+Hooks are also provided to be called when =pandoc= has completed processing.
+
+- =org-pandoc-after-processing-FORMAT-hook= :: Hook called after processing =FORMAT=. 
+
+These hooks are only available for text-file =FORMAT=.
+=after-processing= options can not be specified to =epub=, =docx= or
+=pdf= formats.
+
+For preprocessing hooks, use =org-export-before-processing-hook=.
 
 ** Delayed loading of ox-pandoc
 If you want delayed loading of `ox-pandoc' when
