@@ -8,59 +8,40 @@ tool. Pandoc can produce PDFs, HTML, presentations, markdown files,
 office documents and e-pub publications as well as a number of other
 more specialised formats.
 
-* Supported Formats
+# Github's Org support doesn't seem to be able to do ToCs
+# So use https://github.com/snosov1/toc-org
+* Contents                                                        :TOC:QUOTE:
+#+BEGIN_QUOTE
+- [[#installation][Installation]]
+  - [[#requirements][Requirements]]
+  - [[#installing-pandoc][Installing Pandoc]]
+  - [[#installation-1][Installation]]
+- [[#usage][Usage]]
+  - [[#using-orgs-export-dispatch-menu][Using Org's export-dispatch menu]]
+  - [[#running-the-commands-directly][Running the Commands directly]]
+- [[#document-options][Document options]]
+  - [[#document-specific-options-for-pandoc][Document-specific Options for Pandoc]]
+  - [[#org-mode-export-settings][Org-Mode export settings]]
+- [[#customisation][Customisation]]
+  - [[#setting-default-pandoc-options][Setting default pandoc options]]
+  - [[#hooks][Hooks]]
+  - [[#delayed-loading-of-ox-pandoc][Delayed loading of ox-pandoc]]
+- [[#feature-support][Feature Support]]
+  - [[#source-code-blocks][Source Code Blocks]]
+  - [[#citations-and-bibliographies-experimental][Citations and Bibliographies (Experimental)]]
+  - [[#supported-formats][Supported Formats]]
+- [[#notes][Notes]]
+  - [[#temporary-files][Temporary Files]]
+  - [[#obsolete-in-file-options][Obsolete In-File Options]]
+- [[#history-and-people][History and People]]
+- [[#license][License]]
+#+END_QUOTE
 
-You can convert an Org-mode file to various formats with simple
-commands. The following table shows the supported formats:
-
-| format            | extension | buffer | file |
-|-------------------+-----------+--------+------|
-| asciidoc          | txt       | yes    | yes  |
-| beamer            | tex       | yes    | yes  |
-| beamer-pdf        | pdf       | no     | yes  |
-| commonmark        | md        | yes    | yes  |
-| context           | tex       | yes    | yes  |
-| docbook           | xml       | yes    | yes  |
-| docx              |           | no     | yes  |
-| dzslides          | html      | yes    | yes  |
-| epub2             | epub      | no     | yes  |
-| epub3             | epub      | no     | yes  |
-| fb2               | fb2       | yes    | yes  |
-| gfm               | md        | yes    | yes  |
-| html4             | html      | yes    | yes  |
-| html5             | html      | yes    | yes  |
-| icml              |           | yes    | yes  |
-| json              |           | yes    | yes  |
-| latex             | tex       | yes    | yes  |
-| latex-pdf         | pdf       | no     | yes  |
-| man               |           | yes    | yes  |
-| markdown          | md        | yes    | yes  |
-| markdown_github   | md        | yes    | yes  |
-| markdown_mmd      | md        | yes    | yes  |
-| markdown_phpextra | md        | yes    | yes  |
-| markdown_strict   | md        | yes    | yes  |
-| mediawiki         |           | yes    | yes  |
-| native            | hs        | yes    | yes  |
-| odt               |           | no     | yes  |
-| opendocument      | xml       | yes    | yes  |
-| opml              |           | yes    | yes  |
-| org               |           | yes    | yes  |
-| plain             | txt       | yes    | yes  |
-| pptx              |           | no     | yes  |
-| revealjs          | html      | yes    | yes  |
-| rst               |           | yes    | yes  |
-| rtf               |           | yes    | yes  |
-| s5                | html      | yes    | yes  |
-| slideous          | html      | yes    | yes  |
-| slidy             | html      | yes    | yes  |
-| texinfo           | texi      | yes    | yes  |
-| textile           |           | yes    | yes  |
-
-* Requirements
-
+* Installation
+** Requirements
 You need Emacs 24.4, org-mode 8.2, and Pandoc 2.0 (or later
 versions). 
-
+** Installing Pandoc
 Installing Pandoc directly from
 [[https://pandoc.org/installing.html][the official website]] is
 recommended. The versions of Pandoc provided by package managers and
@@ -70,8 +51,7 @@ By default, =ox-pandoc= will check on starting up whether there is a
 suitable pandoc executable available. When none is found, or the version
 is too old,, a warning will be emitted. This warning can be suppressed
 by setting customisation option =org-pandoc-check-version= to =nil=.
-
-* Installation
+** Installation
 
 You can install this tool with [[www.melpa.org][MELPA]].  For example,
 
@@ -84,7 +64,7 @@ You can install this tool with [[www.melpa.org][MELPA]].  For example,
 : M-x package-install ⏎
 : ox-pandoc ⏎
 
-* Usage and Customisation
+* Usage
 ** Using Org's export-dispatch menu
    As always in Org, =C-c C-e= brings up the export dispatch menu for
    the current org-mode file. =ox-pandoc= lives under the =p= key. By
@@ -113,43 +93,7 @@ The opening of exported files in the =XXX-and-open= variants is handled
 by =org-open-file=. Which applications are used for different file types
 can be customised in Org Mode by the =org-file-apps= variable.
 
-** User options and variables
-
-You can specify the default options passed to pandoc and used on its
-command-line for each document format. 
-
-- =org-pandoc-options= :: General Pandoc options.
-- =org-pandoc-options-for-FORMAT= :: Format-specific options.
-- =org-pandoc-epub-rights= :: EPUB Copyright Statement.
-
-Options should be specified by an alist. List of valid options are
-defined in =org-pandoc-valid-options=. Only long-name options can be
-used. For example, =metadata= must be given as the option name, even
-though Pandoc accepts a short-form version of the argument ("-M").
-Multiple values can be specified to options defined in
-=org-pandoc-colon-separated-options=. They should be defined in
-colon-separated list.
-
-Values of options defined in =org-pandoc-file-options= will be
-expanded to full path if they begin with =~= (tilde) character.
-
-You can also specify output format extension with
-=org-pandoc-format-extensions= variable.
-
-For example:
-
-#+BEGIN_SRC emacs-lisp
-;; default options for all output formats
-(setq org-pandoc-options '((standalone . t)))
-;; cancel above settings only for 'docx' format
-(setq org-pandoc-options-for-docx '((standalone . nil)))
-;; special settings for beamer-pdf and latex-pdf exporters
-(setq org-pandoc-options-for-beamer-pdf '((pdf-engine . "xelatex")))
-(setq org-pandoc-options-for-latex-pdf '((pdf-engine . "pdflatex")))
-;; special extensions for markdown_github output
-(setq org-pandoc-format-extensions '(markdown_github+pipe_tables+raw_html))
-#+END_SRC
-
+* Document options
 ** Document-specific Options for Pandoc
 
 The following document-specific options can be specified. Value =nil=
@@ -199,12 +143,52 @@ Following is an example:
 : #+latex_header: \IEEEauthorblockA{FooBar Institute\\
 : #+latex_header: Email: john.smith@foo.bar}
 
-** Org-Mode Export Settings
+** Org-Mode export settings
 Org Mode defines a considerable number of [[https://orgmode.org/manual/Export-Settings.html][Export settings]]. These control which parts of the org document are exported and how this is done. For example, they can be used to set whether a table of contents is created and whether title and author should be inserted into the output document.
 
 Pandoc should understand and follow these directives. *HOWEVER* pandoc only operates on the file it is given and does not know about settings from Emacs such as customisations. If, for example, you wish not to have a Table of Contents, there must be a line =#+OPTIONS: toc:nil= in the file itself; any global setting of =org-export-with-toc= will not be respected.
 
 Note that Org Mode will by default try to deduce the author's full name (using =user-full-name=) when exporting, even if it is not given in the org document. To suppress this, add =#+OPTIONS: author: nil= in the document's header.
+
+* Customisation
+** Setting default pandoc options
+
+You can specify the default options passed to pandoc and used on its
+command-line for each document format. 
+
+- =org-pandoc-options= :: General Pandoc options.
+- =org-pandoc-options-for-FORMAT= :: Format-specific options.
+- =org-pandoc-epub-rights= :: EPUB Copyright Statement.
+
+Options should be specified by an alist. List of valid options are
+defined in =org-pandoc-valid-options=. Only long-name options can be
+used. For example, =metadata= must be given as the option name, even
+though Pandoc accepts a short-form version of the argument ("-M").
+Multiple values can be specified to options defined in
+=org-pandoc-colon-separated-options=. They should be defined in
+colon-separated list.
+
+Values of options defined in =org-pandoc-file-options= will be
+expanded to full path if they begin with =~= (tilde) character.
+
+You can also specify output format extension with
+=org-pandoc-format-extensions= variable.
+
+For example:
+
+#+BEGIN_SRC emacs-lisp
+;; default options for all output formats
+(setq org-pandoc-options '((standalone . t)))
+;; cancel above settings only for 'docx' format
+(setq org-pandoc-options-for-docx '((standalone . nil)))
+;; special settings for beamer-pdf and latex-pdf exporters
+(setq org-pandoc-options-for-beamer-pdf '((pdf-engine . "xelatex")))
+(setq org-pandoc-options-for-latex-pdf '((pdf-engine . "pdflatex")))
+;; special extensions for markdown_github output
+(setq org-pandoc-format-extensions '(markdown_github+pipe_tables+raw_html))
+#+END_SRC
+
+
 
 ** Hooks 
 Hooks are also provided to be called when =pandoc= has completed processing.
@@ -226,19 +210,7 @@ settings in your init file.
 (with-eval-after-load 'ox
   (require 'ox-pandoc))
 #+END_SRC
-
-* Notes
-** Temporary Files
-=ox-pandoc= works by first using Org-mode's own conversion functions to
-export a temporary version of the org file and then calling =pandoc=
-with the appropriate switches on this file. This process creates
-temporary files in the working directory called "XXXX.tmpZZZZ.org" and
-"XXXX.tmpZZZZ.css" (if necessary). (ZZZZ is a random string)
-
-Under normal operation the temporary files are deleted automatically
-when `pandoc` has finished processing them. If you use =recentf=, you
-may find these files clutter your recent files list. =M-x
-recentf-cleanup= should remove them.
+* Feature Support 
 ** Source Code Blocks
 =ox-pandoc= supports the export of code blocks, including code blocks
 for specific formats (e.g. LaTeX). Code wrapped in =BEGIN_EXPORT
@@ -263,15 +235,6 @@ given a unique name. For example.
 #+END_SRC
 #+END_EXAMPLE
 
-** Obsolete In-File Options
-
-Following options are supported in previous version of =ox-pandoc=.
-They are no longer supported.
-
-- =EPUB_METADATA:= :: obsolete. Use =epub-metadata= in
-     =PANDOC_OPTIONS:= instead.
-- =EPUB_STYLESHEET:= :: obsolete. Use =epub-stylesheet= in
-     =PANDOC_OPTIONS:= instead.
 
 ** Citations and Bibliographies (Experimental)
 Citations can be inserted into Org documents and then, when the document
@@ -300,6 +263,75 @@ In this case, citations and bibliography are resolved and formatted before they 
 An alternative to the above (also relevant for Org 9.4 and earlier) is to ensure that citations in text are transformed to [[https://pandoc.org/org.html#citations][one of the formats that Pandoc recognises in org documents]]. You should then set  =#+PANDOC_OPTIONS: citeproc:t= in the document header.
 
 In this case, citations are instead processed by =pandoc= using CSL. This may be a good solution if you are using one of the alternative citation systems for Org, such as =org-ref=. A goal in =ox-pandoc= is to offer an alternative citation export processor that outputs Pandoc-specific citation syntax, but this is still in planning.
+
+** Supported Formats
+
+You can convert an Org-mode file to various formats with simple
+commands. The following table shows the supported formats:
+
+| format            | extension | buffer | file |
+|-------------------+-----------+--------+------|
+| asciidoc          | txt       | yes    | yes  |
+| beamer            | tex       | yes    | yes  |
+| beamer-pdf        | pdf       | no     | yes  |
+| commonmark        | md        | yes    | yes  |
+| context           | tex       | yes    | yes  |
+| docbook           | xml       | yes    | yes  |
+| docx              |           | no     | yes  |
+| dzslides          | html      | yes    | yes  |
+| epub2             | epub      | no     | yes  |
+| epub3             | epub      | no     | yes  |
+| fb2               | fb2       | yes    | yes  |
+| gfm               | md        | yes    | yes  |
+| html4             | html      | yes    | yes  |
+| html5             | html      | yes    | yes  |
+| icml              |           | yes    | yes  |
+| json              |           | yes    | yes  |
+| latex             | tex       | yes    | yes  |
+| latex-pdf         | pdf       | no     | yes  |
+| man               |           | yes    | yes  |
+| markdown          | md        | yes    | yes  |
+| markdown_github   | md        | yes    | yes  |
+| markdown_mmd      | md        | yes    | yes  |
+| markdown_phpextra | md        | yes    | yes  |
+| markdown_strict   | md        | yes    | yes  |
+| mediawiki         |           | yes    | yes  |
+| native            | hs        | yes    | yes  |
+| odt               |           | no     | yes  |
+| opendocument      | xml       | yes    | yes  |
+| opml              |           | yes    | yes  |
+| org               |           | yes    | yes  |
+| plain             | txt       | yes    | yes  |
+| pptx              |           | no     | yes  |
+| revealjs          | html      | yes    | yes  |
+| rst               |           | yes    | yes  |
+| rtf               |           | yes    | yes  |
+| s5                | html      | yes    | yes  |
+| slideous          | html      | yes    | yes  |
+| slidy             | html      | yes    | yes  |
+| texinfo           | texi      | yes    | yes  |
+| textile           |           | yes    | yes  |
+* Notes
+** Temporary Files
+=ox-pandoc= works by first using Org-mode's own conversion functions to
+export a temporary version of the org file and then calling =pandoc=
+with the appropriate switches on this file. This process creates
+temporary files in the working directory called "XXXX.tmpZZZZ.org" and
+"XXXX.tmpZZZZ.css" (if necessary). (ZZZZ is a random string)
+
+Under normal operation the temporary files are deleted automatically
+when `pandoc` has finished processing them. If you use =recentf=, you
+may find these files clutter your recent files list. =M-x
+recentf-cleanup= should remove them.
+** Obsolete In-File Options
+
+Following options are supported in previous version of =ox-pandoc=.
+They are no longer supported.
+
+- =EPUB_METADATA:= :: obsolete. Use =epub-metadata= in
+     =PANDOC_OPTIONS:= instead.
+- =EPUB_STYLESHEET:= :: obsolete. Use =epub-stylesheet= in
+     =PANDOC_OPTIONS:= instead.
 
 * History and People
   This package was inspired by [[https://github.com/robtillotson/org-pandoc][org-pandoc]], but was entirely re-written by [[http://github.com/kawabata][kawabata]] who is the original author of =ox-pandoc=. The code was released as a emacs package via MELPA.
