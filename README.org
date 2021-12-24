@@ -20,7 +20,7 @@ more specialised formats.
   - [[#using-orgs-export-dispatch-menu][Using Org's export-dispatch menu]]
   - [[#running-the-commands-directly][Running the Commands directly]]
 - [[#document-options][Document options]]
-  - [[#document-specific-options-for-pandoc][Document-specific Options for Pandoc]]
+  - [[#passing-options-to-pandoc][Passing options to pandoc]]
   - [[#org-mode-export-settings][Org-Mode export settings]]
 - [[#customisation][Customisation]]
   - [[#setting-default-pandoc-options][Setting default pandoc options]]
@@ -94,7 +94,13 @@ by =org-open-file=. Which applications are used for different file types
 can be customised in Org Mode by the =org-file-apps= variable.
 
 * Document options
-** Document-specific Options for Pandoc
+** Passing options to pandoc
+The =pandoc= command supports a
+[[https://pandoc.org/MANUAL.html#options][large number of options]]
+which can be used to control how the document is processed and how the
+output should appear. In =ox-pandoc= these options can be specified for
+individual documents or [[#setting-default-pandoc-options][set as
+defaults for specific formats]].
 
 The following document-specific options can be specified. Value =nil=
 overrides preceding option setting. Value =t= means only specify
@@ -124,8 +130,6 @@ option-value pair must be quoted (see example below).
 
 Following is an example:
 
-: # If you don't want author to be appeared, just leave it empty.
-: #+AUTHOR:
 : #+PANDOC_OPTIONS: standalone:t pdf-engine:pdflatex
 : ## When option value includes whitespace, entire name:value pair must be quoted.
 : #+PANDOC_OPTIONS: "epub-cover-image:/home/a/test file.png" standalone:nil
