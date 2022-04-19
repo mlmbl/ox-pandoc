@@ -217,9 +217,17 @@ settings in your init file.
 * Feature Support 
 ** Source Code Blocks
 =ox-pandoc= supports the export of code blocks, including code blocks
-for specific formats (e.g. LaTeX). Code wrapped in =BEGIN_EXPORT
-[format]= will be passed to pandoc and included in the final output if
-the output is of the appropriate format.
+for specific output formats (e.g. LaTeX, HTML). Code wrapped in
+=#+BEGIN_EXPORT [format]= will be passed to pandoc as-is. Pandoc knows how
+to handle these blocks correctly and will include them in the final
+output if they match the target format. The same applies for short
+format-specific snippets using Org's =@@format:= syntax.
+
+Blocks and snippets intended only for the pandoc backend can be
+specified using =#+BEGIN_EXPORT pandoc= and =@@pandoc:=. The inner
+content of these blocks and snippets will be passed to pandoc. This may
+be useful for adding extra information for output formats only supported
+by pandoc, not by Org's own native converters.
 
 =ox-pandoc= also supports the evaluation of embedded code blocks wrapped
 with =BEGIN_SRC [language]=. The various options described by the
