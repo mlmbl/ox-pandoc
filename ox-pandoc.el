@@ -1620,10 +1620,13 @@ holding contextual information."
           (setq number (org-export-get-ordinal
                         destination info nil #'org-html-standalone-image-p)))
 
-         ((eq dest-type 'latex-environment)
+         ((eq dest-type 'latex-environment)   ; Latex block, equation or similar
           (setq number (org-export-get-ordinal
                         destination info nil #'org-pandoc--numbered-equation-p)))
 
+         ((string-prefix-p "citeproc_bib_item" path) ; Rendered citation footnote number
+		  ) ;; leave it alone, it should already be correct
+		 
          (t                           ; captioned items
           (setq number (org-export-get-ordinal
                         destination info nil #'org-pandoc--has-caption-p))))
