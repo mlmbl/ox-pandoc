@@ -152,7 +152,8 @@ version. If nil, no checks are performed and no warnings generated."
     ;;(?: "to rst and open." org-pandoc-export-to-rst-and-open)
     ;;(?* "as rst." org-pandoc-export-as-rst)
     ;;(?< "to slideous." org-pandoc-export-to-slideous)
-    (?\[ "as jira." org-pandoc-export-as-jira)
+    ;; (?\[ "to jira." org-pandoc-export-to-jira)
+	(?\[ "as jira." org-pandoc-export-as-jira)
     (?< "to slideous and open." org-pandoc-export-to-slideous-and-open)
     (?, "as slideous." org-pandoc-export-as-slideous)
     (?= "to ms-pdf and open." org-pandoc-export-to-ms-pdf-and-open)
@@ -758,6 +759,14 @@ version. If nil, no checks are performed and no warnings generated."
   :group 'org-pandoc
   :type 'hook)
 
+(defun org-pandoc-export-to-jira (&optional a s v b e)
+  "Export to jira."
+  (interactive) (org-pandoc-export 'jira a s v b e))
+
+(defun org-pandoc-export-as-jira (&optional a s v b e)
+  "Export as jira."
+  (interactive) (org-pandoc-export 'jira a s v b e t))
+
 (defcustom org-pandoc-options-for-json nil
   "Pandoc options for json."
   :group 'org-pandoc
@@ -767,10 +776,6 @@ version. If nil, no checks are performed and no warnings generated."
   "Hook called after processing json."
   :group 'org-pandoc
   :type 'hook)
-
-(defun org-pandoc-export-as-jira (&optional a s v b e)
-  "Export as jira."
-  (interactive) (org-pandoc-export 'jira a s v b e t))
 
 ;;;###autoload
 (defun org-pandoc-export-to-json (&optional a s v b e)

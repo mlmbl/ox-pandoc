@@ -298,7 +298,7 @@ commands. The following table shows the supported formats:
 | html4             | html      | yes    | yes  |
 | html5             | html      | yes    | yes  |
 | icml              |           | yes    | yes  |
-| jira              | md        | yes    | no   |
+| jira              | md        | yes    | yes  |
 | json              |           | yes    | yes  |
 | latex             | tex       | yes    | yes  |
 | latex-pdf         | pdf       | no     | yes  |
