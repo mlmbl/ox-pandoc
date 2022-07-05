@@ -69,25 +69,31 @@ You can install this tool with [[www.melpa.org][MELPA]].  For example,
    As always in Org, =C-c C-e= brings up the export dispatch menu for
    the current org-mode file. =ox-pandoc= lives under the =p= key. By
    default, options are offered to convert the org-file to a number of
-   commonly used formats, such as LaTeX, PDF and HTML.
+   commonly used and generic formats, such as LaTeX, PDF, HTML, markdown
+   and word-processor files.
 
-   As pandoc supports many formats, the default =org-export-dispatch=
-   shortcut menu does not show all the supported formats. You can
-   customize =org-pandoc-menu-entry= variable (and probably restart
-   Emacs) to change its default menu entries. A full list of exporting
-   commands and suggested shortcuts can be found in =ox-pandoc.el=.
+   Pandoc and =ox-pandoc= support a very large number of [[*Supported Formats][output formats]].
+   To avoid cluttering Org's export menu, most formats are not shown by
+   default. For example, most application-specific formats, markdown
+   dialects and slides are not included. You can customize the
+   =org-pandoc-menu-entry= variable (and probably restart Emacs) to
+   change the menu entries to include those you commonly use. A full
+   list of exporting commands and suggested shortcuts can be found in
+   =ox-pandoc.el=.
 
 ** Running the Commands directly
 
-For example, to convert org-mode file to 'html5' format, you may run
-the following commands.
+The exporters can be called directly via =M-x=. For example, to convert
+org-mode file to 'html5' format, you may run the following commands:
 
 - =org-pandoc-export-as-html5= :: Exports to the HTML5 text as a buffer.
 - =org-pandoc-export-to-html5= :: Exports to the HTML5 text file.
 - =org-pandoc-export-to-html5-and-open= :: Exports and open HTML5 file.
 
-Similar commands are prepared for a wide variety of other output
-formats.
+All of the formats supported by =ox-pandoc= have corresponding commands
+named in this way. =org-pandoc-export-as-[FORMAT]= exports to a buffer
+and =org-pandoc-export-to-[FORMAT]= exports to a file. Note that some
+formats (e.g. PDF) can only be exported to a file, not to a buffer.
 
 The opening of exported files in the =XXX-and-open= variants is handled
 by =org-open-file=. Which applications are used for different file types
