@@ -759,10 +759,12 @@ version. If nil, no checks are performed and no warnings generated."
   :group 'org-pandoc
   :type 'hook)
 
+;;;###autoload
 (defun org-pandoc-export-to-jira (&optional a s v b e)
   "Export to jira."
   (interactive) (org-pandoc-export 'jira a s v b e))
 
+;;;###autoload
 (defun org-pandoc-export-as-jira (&optional a s v b e)
   "Export as jira."
   (interactive) (org-pandoc-export 'jira a s v b e t))
