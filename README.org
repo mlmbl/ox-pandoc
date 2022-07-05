@@ -39,8 +39,11 @@ more specialised formats.
 
 * Installation
 ** Requirements
-You need Emacs 24.4, org-mode 8.2, and Pandoc 2.0 (or later
-versions). 
+You need Emacs 24.4, org-mode 8.2, and Pandoc 2.0 (or later versions).
+
+Note that the support for [[*Citations and Bibliographies (Experimental)][citations]] in newest versions of org-mode
+(9.5+) require a similarly recent version of Pandoc (2.17+).
+
 ** Installing Pandoc
 Installing Pandoc directly from
 [[https://pandoc.org/installing.html][the official website]] is
@@ -49,7 +52,7 @@ distributions is often quite out-of-date.
 
 By default, =ox-pandoc= will check on starting up whether there is a
 suitable pandoc executable available. When none is found, or the version
-is too old,, a warning will be emitted. This warning can be suppressed
+is too old, a warning will be emitted. This warning can be suppressed
 by setting customisation option =org-pandoc-check-version= to =nil=.
 ** Installation
 
