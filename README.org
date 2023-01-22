@@ -26,13 +26,14 @@ more specialised formats.
   - [[#setting-default-pandoc-options][Setting default pandoc options]]
   - [[#hooks][Hooks]]
   - [[#delayed-loading-of-ox-pandoc][Delayed loading of ox-pandoc]]
+  - [[#temporary-files][Temporary Files]]
 - [[#feature-support][Feature Support]]
   - [[#source-code-blocks][Source Code Blocks]]
   - [[#citations-and-bibliographies-experimental][Citations and Bibliographies (Experimental)]]
   - [[#supported-formats][Supported Formats]]
-- [[#notes][Notes]]
-  - [[#temporary-files][Temporary Files]]
+- [[#deprecated-and-removed-features][Deprecated and Removed Features]]
   - [[#obsolete-in-file-options][Obsolete In-File Options]]
+  - [[#numbering-of-figures-tables-and-equations][Numbering of figures, tables and equations]]
 - [[#history-and-people][History and People]]
 - [[#license][License]]
 #+END_QUOTE
@@ -202,7 +203,6 @@ For example:
 #+END_SRC
 
 
-
 ** Hooks 
 Hooks are also provided to be called when =pandoc= has completed processing.
 
@@ -223,6 +223,20 @@ settings in your init file.
 (with-eval-after-load 'ox
   (require 'ox-pandoc))
 #+END_SRC
+
+** Temporary Files
+=ox-pandoc= works by first using Org-mode's own conversion functions to
+export a temporary version of the org file /in org format/ and then
+calling =pandoc= with the appropriate switches on this file. This
+process creates temporary files in the working directory called
+"XXXX.tmpZZZZ.org" and "XXXX.tmpZZZZ.css" (if necessary). (ZZZZ is a
+random string)
+
+Under normal operation the temporary files are deleted automatically
+when `pandoc` has finished processing them. If you use =recentf=, you
+may find these files clutter your recent files list. =M-x
+recentf-cleanup= should remove them.
+
 * Feature Support 
 ** Source Code Blocks
 =ox-pandoc= supports the export of code blocks, including code blocks
@@ -255,7 +269,6 @@ given a unique name. For example.
 (+ 4 7)
 #+END_SRC
 #+END_EXAMPLE
-
 
 ** Citations and Bibliographies (Experimental)
 Citations can be inserted into Org documents and then, when the document
@@ -333,21 +346,9 @@ commands. The following table shows the supported formats:
 | slidy             | html      | yes    | yes  |
 | texinfo           | texi      | yes    | yes  |
 | textile           |           | yes    | yes  |
-* Notes
-** Temporary Files
-=ox-pandoc= works by first using Org-mode's own conversion functions to
-export a temporary version of the org file and then calling =pandoc=
-with the appropriate switches on this file. This process creates
-temporary files in the working directory called "XXXX.tmpZZZZ.org" and
-"XXXX.tmpZZZZ.css" (if necessary). (ZZZZ is a random string)
-
-Under normal operation the temporary files are deleted automatically
-when `pandoc` has finished processing them. If you use =recentf=, you
-may find these files clutter your recent files list. =M-x
-recentf-cleanup= should remove them.
+* Deprecated and Removed Features
 ** Obsolete In-File Options
-
-Following options are supported in previous version of =ox-pandoc=.
+The following options were supported in previous version of =ox-pandoc=.
 They are no longer supported.
 
 - =EPUB_METADATA:= :: obsolete. Use =epub-metadata= in
@@ -355,6 +356,19 @@ They are no longer supported.
 - =EPUB_STYLESHEET:= :: obsolete. Use =epub-stylesheet= in
      =PANDOC_OPTIONS:= instead.
 
+** Numbering of figures, tables and equations
+=ox-pandoc= was originally developed for =pandoc= version 1. Subsequent
+versions of pandoc (2.0 in 2017, 3.0 in 2023) and Org mode have improved
+support for automatic numbering of figures, tables and equations. 
+
+The non-customisable and non-optional numbering of figures, tables and
+the like is removed from =ox-pandoc=. This is to avoid conflict with
+pandoc's own numbering. It is recommended to use pandoc for numbering.
+
+Since this is a breaking change, you may pin your =ox-pandoc= version to
+the last one that included numbering of figures if you require the old
+behaviour. The last numbered version of =ox-pandoc= with numbering is
+*v1.2*.
 * History and People
   This package was inspired by [[https://github.com/robtillotson/org-pandoc][org-pandoc]], but was entirely re-written by [[http://github.com/kawabata][kawabata]] who is the original author of =ox-pandoc=. The code was released as a emacs package via MELPA.
 
