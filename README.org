@@ -365,10 +365,12 @@ The non-customisable and non-optional numbering of figures, tables and
 the like is removed from =ox-pandoc=. This is to avoid conflict with
 pandoc's own numbering. It is recommended to use pandoc for numbering.
 
-Since this is a breaking change, you may pin your =ox-pandoc= version to
-the last one that included numbering of figures if you require the old
-behaviour. The last numbered version of =ox-pandoc= with numbering is
-*v1.2*.
+This is an incompatible change that alters output from exisiting
+documents. If you require the old behaviour you may pin your =ox-pandoc=
+version to one that included numbering of figures. The last tagged
+version of =ox-pandoc= with numbering is *v1.2023*, from January 2023.
+No fixes or features will be ported to this version.
+
 * History and People
   This package was inspired by [[https://github.com/robtillotson/org-pandoc][org-pandoc]], but was entirely re-written by [[http://github.com/kawabata][kawabata]] who is the original author of =ox-pandoc=. The code was released as a emacs package via MELPA.
 
