@@ -368,7 +368,7 @@ pandoc's own numbering. It is recommended to use pandoc for numbering.
 This is an incompatible change that alters output from exisiting
 documents. If you require the old behaviour you may pin your =ox-pandoc=
 version to one that included numbering of figures. The last tagged
-version of =ox-pandoc= with numbering is *v1.2023*, from January 2023.
+version of =ox-pandoc= with numbering is *v2.0*, from January 2023.
 No fixes or features will be ported to this version.
 
 * History and People
