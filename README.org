@@ -31,6 +31,7 @@ more specialised formats.
   - [[#source-code-blocks][Source Code Blocks]]
   - [[#citations-and-bibliographies-experimental][Citations and Bibliographies (Experimental)]]
   - [[#supported-formats][Supported Formats]]
+  - [[#labelling-and-numbering-of-figures-tables-etc][Labelling and numbering of figures, tables etc.]]
 - [[#deprecated-and-removed-features][Deprecated and Removed Features]]
   - [[#obsolete-in-file-options][Obsolete In-File Options]]
   - [[#numbering-of-figures-tables-and-equations][Numbering of figures, tables and equations]]
