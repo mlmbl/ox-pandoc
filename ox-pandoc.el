@@ -1547,11 +1547,8 @@ INFO is a plist holding contextual information."
       ;; a "\qquad" space, ala pandoc-crossref
       ;; (https://github.com/lierdakil/pandoc-crossref)
       (when (org-pandoc--numbered-equation-p latex-env info)
-        (let ((reference (org-export-get-ordinal
-                          latex-env info nil
-                          #'org-pandoc--numbered-equation-p)))
           (setq replacement-str
-                (format "\n$$\\1 \\\\qquad (%d)$$" reference))))
+                (format "\n$$\\1$$"))))
 
       ;; For equations with a named links target (`#+NAME:' block), add
       ;; the target to the top of the equation
@@ -1849,7 +1846,8 @@ Called on completion of an asynchronous pandoc process."
      (display-warning 'ox-pandoc (format "Signal Received. %s" message)))
     (exit
      (dolist (file (process-get process 'files))
-       (if (and file (file-exists-p file)) (delete-file file)))
+       ;; (if (and file (file-exists-p file)) (delete-file file))
+	   )
      (let ((exit-status (process-exit-status process))
            (buffer (process-buffer process))
            (output-file (process-get process 'output-file))
