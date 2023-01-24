@@ -202,7 +202,6 @@ For example:
 (setq org-pandoc-format-extensions '(markdown_github+pipe_tables+raw_html))
 #+END_SRC
 
-
 ** Hooks 
 Hooks are also provided to be called when =pandoc= has completed processing.
 
@@ -346,6 +345,26 @@ commands. The following table shows the supported formats:
 | slidy             | html      | yes    | yes  |
 | texinfo           | texi      | yes    | yes  |
 | textile           |           | yes    | yes  |
+** Labelling and numbering of figures, tables etc.
+Pandoc provides features for the automated numbering and referencing of
+figures, tables, equations and listings through the use of add-on
+filters such as [[https://github.com/tomduck/pandoc-xnos][pandoc-xnos]] and [[https://github.com/lierdakil/pandoc-crossref][pandoc-crossref]]. These filters can be
+installed and then enabled with =ox-pandoc= in the usual way, such as
+through a document header like:
+#+begin_src org
+#+pandoc_options: filter:pandoc-fignos 
+#+end_src
+These pandoc filters rely on labelling of individual figures in your org
+document with a =#+label:= attribute. This attribute is deprecated in
+current Org Mode, but can still be used with ox-pandoc to tag figures
+etc. that should be automatically numbered and included in lists:
+#+begin_src org
+#+caption: A caption for the image
+#+name: fig:myimage_name
+#+label: fig:myimage_label
+[[file:myimage.png]]
+#+end_src
+
 * Deprecated and Removed Features
 ** Obsolete In-File Options
 The following options were supported in previous version of =ox-pandoc=.
@@ -362,14 +381,15 @@ versions of pandoc (2.0 in 2017, 3.0 in 2023) and Org mode have improved
 support for automatic numbering of figures, tables and equations. 
 
 The non-customisable and non-optional numbering of figures, tables and
-the like is removed from =ox-pandoc=. This is to avoid conflict with
-pandoc's own numbering. It is recommended to use pandoc for numbering.
+the like has been removed from =ox-pandoc=. This is to avoid conflicts
+with automatic labelling and numbering of these document elements in
+=pandoc= and optional filters.
 
-This is an incompatible change that alters output from exisiting
+This is an incompatible change that alters output from existing
 documents. If you require the old behaviour you may pin your =ox-pandoc=
 version to one that included numbering of figures. The last tagged
-version of =ox-pandoc= with numbering is *v2.0*, from January 2023.
-No fixes or features will be ported to this version.
+version of =ox-pandoc= with numbering is *v2.0*, from January 2023. No
+fixes or features will be ported to this version.
 
 * History and People
   This package was inspired by [[https://github.com/robtillotson/org-pandoc][org-pandoc]], but was entirely re-written by [[http://github.com/kawabata][kawabata]] who is the original author of =ox-pandoc=. The code was released as a emacs package via MELPA.
