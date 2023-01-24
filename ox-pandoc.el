@@ -1548,7 +1548,7 @@ INFO is a plist holding contextual information."
       ;; (https://github.com/lierdakil/pandoc-crossref)
       (when (org-pandoc--numbered-equation-p latex-env info)
           (setq replacement-str
-                (format "\n$$\\1$$"))))
+                (format "\n$$\\1$$")))
 
       ;; For equations with a named links target (`#+NAME:' block), add
       ;; the target to the top of the equation
