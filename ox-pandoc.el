@@ -94,6 +94,11 @@
            (alist :key-type (choice ,@(--map `(const ,it) org-pandoc-valid-options))
                   :value-type (choice (const t) (const nil) string))))
 
+;; For exporting with ox-pandoc, the "LABEL" attribute is preserved and
+;; not, as in other exporters, normalised to "NAME"
+(defconst org-pandoc-element-keyword-translation-alist
+	  (--remove (equal "LABEL" (car it) ) org-element-keyword-translation-alist))
+
 (defcustom org-pandoc-options '((standalone . t)) ;; (mathjax . t) (parse-raw . t)
   "Pandoc options."
   :group 'org-pandoc
@@ -1472,9 +1477,10 @@ t means output to buffer."
   (unless (executable-find org-pandoc-command)
     (error "Pandoc (version 1.12.4 or later) can not be found"))
   (setq org-pandoc-format format)
-  (org-export-to-file 'pandoc (org-export-output-file-name
-                               (concat (make-temp-name ".tmp") ".org") s)
-    a s v b e (lambda (f) (org-pandoc-run-to-buffer-or-file f format s buf-or-open))))
+  (let ((org-element-keyword-translation-alist org-pandoc-element-keyword-translation-alist))
+	(org-export-to-file 'pandoc (org-export-output-file-name
+									  (concat (make-temp-name ".tmp") ".org") s)
+		   a s v b e (lambda (f) (org-pandoc-run-to-buffer-or-file f format s buf-or-open)))))
 
 (defun org-pandoc--has-caption-p (element _info)
   "Non-nil when ELEMENT has a caption affiliated keyword.
