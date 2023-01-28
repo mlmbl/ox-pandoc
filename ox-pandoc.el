@@ -1846,7 +1846,7 @@ Called on completion of an asynchronous pandoc process."
      (display-warning 'ox-pandoc (format "Signal Received. %s" message)))
     (exit
      (dolist (file (process-get process 'files))
-       ;; (if (and file (file-exists-p file)) (delete-file file))
+	   (if (and file (file-exists-p file)) (delete-file file))
 	   )
      (let ((exit-status (process-exit-status process))
            (buffer (process-buffer process))
