@@ -1,7 +1,7 @@
 ;;; ox-pandoc.el --- An Org-mode exporter using pandoc -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2014-2017 KAWABATA, Taichi
-;; Copyright (C) 2021 FENTON, Alex
+;; Copyright (C) 2021-2023 FENTON, Alex
 
 ;; Filename: ox-pandoc.el
 ;; Description: Another org exporter for Pandoc
@@ -9,7 +9,7 @@
 ;;         FENTON, Alex <a-fent@github>
 ;; Maintainer: FENTON, Alex <a-fent@github>
 ;; Created: 2014-07-20
-;; Version: 1.210925
+;; Version: 2.0
 ;; Package-Requires: ((org "8.2") (emacs "24.4") (dash "2.8") (ht "2.0"))
 ;; Keywords: tools
 ;; URL: https://github.com/a-fent/ox-pandoc
