@@ -1516,7 +1516,9 @@ version. If nil, no checks are performed and no warnings generated."
 (defun org-pandoc-export (format _a s v b e &optional buf-or-open)
   "General interface for Pandoc Export.
 If BUF-OR-OPEN is nil, output to file.  0, then open the file.
-t means output to buffer."
+t means output to buffer.
+FORMAT is an output format supported by Pandoc or FORMAT-pdf, to
+further export to pdf, after converting to FORMAT."
   (unless (derived-mode-p 'org-mode)
     (error "This command must be run on an org-mode buffer"))
   (unless (executable-find org-pandoc-command)
