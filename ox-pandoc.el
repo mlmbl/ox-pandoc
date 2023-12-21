@@ -125,8 +125,6 @@ version. If nil, no checks are performed and no warnings generated."
 
 (defcustom org-pandoc-menu-entry
   '(
-    (?, "to typst-pdf." org-pandoc-export-to-typst-pdf)
-    (?< "to typst-pdf and open." org-pandoc-export-to-typst-pdf-and-open)
     ;;(?0 "to jats." org-pandoc-export-to-jats)
     ;;(?0 "to jats and open." org-pandoc-export-to-jats-and-open)
     ;;(?  "as jats." org-pandoc-export-as-jats)
@@ -222,6 +220,11 @@ version. If nil, no checks are performed and no warnings generated."
     ;;(?t "to texinfo." org-pandoc-export-to-texinfo)
     ;;(?t "to texinfo and open." org-pandoc-export-to-texinfo-and-open)
     ;;(?T "as texinfo." org-pandoc-export-as-texinfo)
+	;; (?, "to typst." org-pandoc-export-to-typst)
+    ;; (?, "to typst and open." org-pandoc-export-to-typst-and-open)
+    ;; (?, "as typst." org-pandoc-export-as-typst)
+    ;; (?< "to typst-pdf." org-pandoc-export-to-typst-pdf)
+    ;; (?< "to typst-pdf and open." org-pandoc-export-to-typst-pdf-and-open)
     ;;(?u "to dokuwiki." org-pandoc-export-to-dokuwiki)
     ;; (?u "to dokuwiki and open." org-pandoc-export-to-dokuwiki-and-open)
     ;; (?U "as dokuwiki." org-pandoc-export-as-dokuwiki)
