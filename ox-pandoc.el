@@ -125,6 +125,8 @@ version. If nil, no checks are performed and no warnings generated."
 
 (defcustom org-pandoc-menu-entry
   '(
+    (?, "to typst-pdf." org-pandoc-export-to-typst-pdf)
+    (?< "to typst-pdf and open." org-pandoc-export-to-typst-pdf-and-open)
     ;;(?0 "to jats." org-pandoc-export-to-jats)
     ;;(?0 "to jats and open." org-pandoc-export-to-jats-and-open)
     ;;(?  "as jats." org-pandoc-export-as-jats)
@@ -1433,6 +1435,51 @@ version. If nil, no checks are performed and no warnings generated."
 (defun org-pandoc-export-as-textile (&optional a s v b e)
   "Export as textile."
   (interactive) (org-pandoc-export 'textile a s v b e t))
+
+(defcustom org-pandoc-after-processing-typst-hook nil
+  "Hook called after processing typst."
+  :group 'org-pandoc
+  :type 'hook)
+
+(defcustom org-pandoc-options-for-typst nil
+  "Pandoc options for typst."
+  :group 'org-pandoc
+  :type org-pandoc-option-type)
+
+(defcustom org-pandoc-options-for-typst-pdf nil
+  "Pandoc options for typst-pdf."
+  :group 'org-pandoc
+  :type org-pandoc-option-type)
+
+;;;###autoload
+(defun org-pandoc-export-as-typst (&optional a s v b e)
+  "Export as typst."
+  (interactive) (org-pandoc-export 'typst a s v b e t))
+
+;;;###autoload
+(defun org-pandoc-export-as-zimwiki (&optional a s v b e)
+  "Export as zimwiki."
+  (interactive) (org-pandoc-export 'zimwiki a s v b e t))
+
+;;;###autoload
+(defun org-pandoc-export-to-typst (&optional a s v b e)
+  "Export to typst."
+  (interactive) (org-pandoc-export 'typst a s v b e))
+
+;;;###autoload
+(defun org-pandoc-export-to-typst-and-open (&optional a s v b e)
+  "Export to typst and open."
+  (interactive) (org-pandoc-export 'typst a s v b e 0))
+
+;;;###autoload
+(defun org-pandoc-export-to-typst-pdf (&optional a s v b e)
+  "Export to typst-pdf."
+  (interactive) (org-pandoc-export 'typst-pdf a s v b e))
+
+;;;###autoload
+(defun org-pandoc-export-to-typst-pdf-and-open (&optional a s v b e)
+  "Export to typst-pdf and open."
+  (interactive) (org-pandoc-export 'typst-pdf a s v b e 0))
 
 (defcustom org-pandoc-options-for-zimwiki nil
   "Pandoc options for zimwiki."
