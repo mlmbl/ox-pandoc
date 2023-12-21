@@ -1468,7 +1468,7 @@ version. If nil, no checks are performed and no warnings generated."
 (defvar org-pandoc-epub-meta nil)
 (defvar org-pandoc-epub-css nil)
 
-(defun org-pandoc-export (format a s v b e &optional buf-or-open)
+(defun org-pandoc-export (format _a s v b e &optional buf-or-open)
   "General interface for Pandoc Export.
 If BUF-OR-OPEN is nil, output to file.  0, then open the file.
 t means output to buffer."
@@ -1478,9 +1478,10 @@ t means output to buffer."
     (error "Pandoc (version 1.12.4 or later) can not be found"))
   (setq org-pandoc-format format)
   (let ((org-element-keyword-translation-alist org-pandoc-element-keyword-translation-alist))
-	(org-export-to-file 'pandoc (org-export-output-file-name
-									  (concat (make-temp-name ".tmp") ".org") s)
-		   a s v b e (lambda (f) (org-pandoc-run-to-buffer-or-file f format s buf-or-open)))))
+    (org-export-to-file 'pandoc (org-export-output-file-name
+				 (concat (make-temp-name ".tmp") ".org") s)
+      nil ;; Org mode's native async processing is explicitly disabled because we arrange pandoc running asynchronously all the time.
+      s v b e (lambda (f) (org-pandoc-run-to-buffer-or-file f format s buf-or-open)))))
 
 (defun org-pandoc--has-caption-p (element _info)
   "Non-nil when ELEMENT has a caption affiliated keyword.
