@@ -346,6 +346,9 @@ commands. The following table shows the supported formats:
 | slidy             | html      | yes    | yes  |
 | texinfo           | texi      | yes    | yes  |
 | textile           |           | yes    | yes  |
+| typst             | typst     | yes    | yes  |
+| typst-pdf         | pdf       | no     | yes  |
+
 ** Labelling and numbering of figures, tables etc.
 Pandoc provides features for the automated numbering and referencing of
 figures, tables, equations and listings through the use of add-on
