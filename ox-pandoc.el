@@ -1455,16 +1455,6 @@ version. If nil, no checks are performed and no warnings generated."
   :type org-pandoc-option-type)
 
 ;;;###autoload
-(defun org-pandoc-export-as-typst (&optional a s v b e)
-  "Export as typst."
-  (interactive) (org-pandoc-export 'typst a s v b e t))
-
-;;;###autoload
-(defun org-pandoc-export-as-zimwiki (&optional a s v b e)
-  "Export as zimwiki."
-  (interactive) (org-pandoc-export 'zimwiki a s v b e t))
-
-;;;###autoload
 (defun org-pandoc-export-to-typst (&optional a s v b e)
   "Export to typst."
   (interactive) (org-pandoc-export 'typst a s v b e))
@@ -1473,6 +1463,11 @@ version. If nil, no checks are performed and no warnings generated."
 (defun org-pandoc-export-to-typst-and-open (&optional a s v b e)
   "Export to typst and open."
   (interactive) (org-pandoc-export 'typst a s v b e 0))
+
+;;;###autoload
+(defun org-pandoc-export-as-typst (&optional a s v b e)
+  "Export as typst."
+  (interactive) (org-pandoc-export 'typst a s v b e t))
 
 ;;;###autoload
 (defun org-pandoc-export-to-typst-pdf (&optional a s v b e)
