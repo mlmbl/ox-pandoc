@@ -56,9 +56,9 @@ By default, =ox-pandoc= will check on starting up whether there is a
 suitable pandoc executable available. When none is found, or the version
 is too old, a warning will be emitted. This warning can be suppressed
 by setting customisation option =org-pandoc-check-version= to =nil=.
-** Installation
 
-You can install this tool with [[www.melpa.org][MELPA]].  For example,
+** Installation
+You can install this tool with [[https://www.melpa.org][MELPA]].  For example,
 
 #+BEGIN_SRC emacs-lisp
 (setq package-archives
