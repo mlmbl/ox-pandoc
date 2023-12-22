@@ -1633,10 +1633,10 @@ INFO is a plist holding contextual information."
 (defun org-pandoc-link (link contents info)
   "Transcode a LINK object.
 
-The registered formatter for the 'pandoc backend is used. If none
-exists, transcode using the registered formatter for the 'org
-export backend. For fuzzy (internal) links, resolve the link
-destination in order to determine the appropriate reference
+The registered formatter for the \\='pandoc backend is used. If
+none exists, transcode using the registered formatter for the
+\\='org export backend. For fuzzy (internal) links, resolve the
+link destination in order to determine the appropriate reference
 number of the target Table/Figure/Equation etc. CONTENTS is the
 description of the link, as a string, or nil. INFO is a plist
 holding contextual information."
@@ -1801,9 +1801,10 @@ holding contextual information."
 
 (defun org-pandoc-export-snippet (export-snippet contents info)
   "Transcode a @@format:snippet@@ from Org to Pandoc.
+
 If it is an output format, such as latex or html, the snippet is
 duplicated in full for pandoc to handle as Org's own exporters
-would. If the snippet specifies 'pandoc' as the format, the inner
+would. If the snippet specifies `pandoc' as the format, the inner
 content of the snippet is passed to pandoc. CONTENTS is the
 contents of the block. INFO is a plist holding contextual
 information."
