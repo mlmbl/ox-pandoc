@@ -1704,7 +1704,7 @@ holding contextual information."
      ;; Otherwise, fallback to standard org-mode link format
      ((org-element-link-interpreter link contents)))))
 
-(defun org-pandoc-table (table contents info)
+(defun org-pandoc-table (table contents _info)
   "Transcode a TABLE element from Org to Pandoc.
 CONTENTS is the contents of the table.  INFO is a plist holding
 contextual information."
@@ -1773,7 +1773,7 @@ Option table is created in this stage."
         (funcall org-template contents info)
     contents)))
 
-(defun org-pandoc-paragraph (paragraph contents info)
+(defun org-pandoc-paragraph (paragraph contents _info)
   "Transcode a PARAGRAPH element from Org to Pandoc.
 CONTENTS is the contents of the paragraph, as a string.  INFO is
 the plist used as a communication channel."
@@ -1781,7 +1781,7 @@ the plist used as a communication channel."
   ;; preserves #+ATTR_* tags in the output.
   (org-export-expand paragraph contents t))
 
-(defun org-pandoc-src-block (src-block contents info)
+(defun org-pandoc-src-block (src-block contents _info)
   "Transcode a SRC-BLOCK element from Org to Pandoc.
 CONTENTS is the contents of the table. INFO is a plist holding
 contextual information."
