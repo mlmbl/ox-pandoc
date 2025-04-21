@@ -87,7 +87,7 @@
     (markdown_strict . md) (native . hs)
     (opendocument . xml) (plain . txt) (revealjs . html) (s5 . html)
     (slideous . html) (slidy . html) (texinfo . texi)
-    (zimwiki . zim)))
+    (zimwiki . zim) (typst . typ)))
 
 (defconst org-pandoc-option-type
   `(choice (const t) (const nil)
