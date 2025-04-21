@@ -47,23 +47,23 @@
   :group 'org-export)
 
 (defconst org-pandoc-valid-options
-  '(abbreviations ascii atx-headers base-header-level bash-completion
-    biblatex bibliography citation-abbreviations citeproc columns csl css
-    data-dir default-image-extension defaults dpi dump-args email-obfuscation eol
-    epub-chapter-level epub-cover-image epub-embed-font epub-metadata
-    epub-subdirectory extract-media fail-if-warnings file-scope filter
-    highlight-style html-q-tags id-prefix ignore-args include-after-body
-    include-before-body include-in-header incremental
-    indented-code-classes katex list-extensions list-highlight-languages
-    list-highlight-styles listings log lua-filter mathjax mathml
-    metadata natbib no-highlight number-offset number-sections
-    pdf-engine-opt pdf-engine preserve-tabs print-default-data-file
-    print-default-template quiet reference-doc reference-links
-    reference-location resource-path section-divs self-contained
-	shift-heading-level-by slide-level standalone strip-comments
-	syntax-definition tab-stop  table-of-contents template title-prefix
-	toc top-level-division toc-depth trace track-changes variable
-	verbose version webtex wrap))
+  '( abbreviations ascii atx-headers base-header-level bash-completion
+     biblatex bibliography citation-abbreviations citeproc columns csl css
+     data-dir default-image-extension defaults dpi dump-args email-obfuscation eol
+     epub-chapter-level epub-cover-image epub-embed-font epub-metadata
+     epub-subdirectory extract-media fail-if-warnings file-scope filter
+     highlight-style html-q-tags id-prefix ignore-args include-after-body
+     include-before-body include-in-header incremental
+     indented-code-classes katex list-extensions list-highlight-languages
+     list-highlight-styles listings log lua-filter mathjax mathml
+     metadata metadata-file natbib no-highlight number-offset number-sections
+     pdf-engine-opt pdf-engine preserve-tabs print-default-data-file
+     print-default-template quiet reference-doc reference-links
+     reference-location resource-path section-divs self-contained
+     shift-heading-level-by slide-level standalone strip-comments
+     syntax-definition tab-stop  table-of-contents template title-prefix
+     toc top-level-division toc-depth trace track-changes variable
+     verbose version webtex wrap))
 
 (defconst org-pandoc-colon-separated-options
   '(abbreviations css include-in-header include-before-body
