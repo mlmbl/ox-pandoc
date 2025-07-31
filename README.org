@@ -125,6 +125,7 @@ option-value pair must be quoted (see example below).
 - =PANDOC_OPTIONS:= :: Add command line options to the Pandoc process.
 - =PANDOC_METADATA:= :: Metadata for Pandoc.
 - =PANDOC_EXTENSIONS:= :: Extensions for specific Pandoc output.
+- =PANDOC_INPUT_EXTENSIONS:= :: Extensionf for input format (e.g. +east_asian_line_breaks, etc.)
 - =PANDOC_VARIABLES:= :: Variables for Pandoc.
 - =EPUB_RIGHTS:= :: copyright info to be embedded to EPUB metadata.
 - =EPUB_CHAPTER_LEVEL:= :: same as 'epub-chapter-level' pandoc-option.
